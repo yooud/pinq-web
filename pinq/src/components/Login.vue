@@ -19,7 +19,7 @@
           />
           <label class="password-check">
             <input type="checkbox" v-model="showPassword" />
-            Показати пароль
+            Show password
           </label>
         </div>
         
@@ -71,7 +71,6 @@ export default {
 
 <style>
   .login{
-    background-color: #a798d6 ;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -86,7 +85,7 @@ export default {
     border-radius: 20px;
     border: 2px solid rgb(166, 154, 167);
     padding: 35px 25px;
-    background-color: #71619c ;
+    background-color: #000 ;
   }
   .login-head{
     text-align: center;
@@ -98,7 +97,7 @@ export default {
     border: none;
     padding: 5px 15px;
     border-radius: 15px;
-    color: #7446aa;
+    color: #000;
     font-size: 20px;
   }
   .login-btn{
@@ -115,9 +114,8 @@ export default {
     width: 40%;
   }
   .login-btn-button:hover {
-    box-shadow: 0px 5px 10px rgba(58, 6, 63, 0.2);
-    color: #fff;
-    background-color: #7A688F;
+    box-shadow: 0px 5px 10px rgba(211, 176, 22, 0.5);
+    color: #967418;
     animation: shadow-pulse 1s infinite;
   }
   .login-other{

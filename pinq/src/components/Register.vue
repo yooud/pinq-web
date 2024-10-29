@@ -25,7 +25,7 @@
             />
             <label class="password-check">
               <input type="checkbox" v-model="showPassword" />
-              Показати пароль
+              Show password
             </label>
           </div>
           <div class="login-btn">

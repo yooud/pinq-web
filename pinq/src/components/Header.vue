@@ -4,7 +4,7 @@
       <div class="header-wrapper">
         <div class="header-logo">
           <router-link :to="{ name: 'main' }">
-            <img type="image" src="" alt="logo">
+            <h1 class="logo">pinq</h1>
           </router-link> 
         </div>
         <div class="header-nav">
@@ -32,10 +32,13 @@
 </template>
 
 <style>
-header {
+.header {
   padding: 10px 0;
   flex-grow: 0;
-  background-color: #3A2547 ;
+  background-color: #000 ;
+  color: #fff;
+}
+.logo{
   color: #fff;
 }
 .header-wrapper{
@@ -57,7 +60,7 @@ header {
   padding: 5px 10px;
 }
 .header-nav-link:hover{
-  color: #7A688F;
+  color: #e4b42f;
 }
 .header-nav-btn{
   padding: 5px 15px;
@@ -67,20 +70,19 @@ header {
 }
 .header-nav-btn:hover {
   box-shadow: 0px 5px 10px rgba(58, 6, 63, 0.2);
-  color: #fff;
-  background-color: #7A688F;
+  color: #e4b42f;
   animation: shadow-pulse 1s infinite;
 }
 
 @keyframes shadow-pulse {
   0% {
-    box-shadow: 0px 4px 8px rgba(58, 6, 63, 0.4);
+    box-shadow: 0px 0px 8px rgba(218, 161, 40, 0.4);
   }
   50% {
-    box-shadow: 0px 12px 16px rgba(58, 6, 63, 0.8);
+    box-shadow: 0px 4px 16px rgba(218, 161, 40, 0.8);
   }
   100% {
-    box-shadow: 0px 4px 8px rgba(58, 6, 63, 0.4);
+    box-shadow: 0px 0px 8px rgba(218, 161, 40, 0.4);
   }
 }
 </style>

@@ -9,6 +9,7 @@
               </p>
             </div>
             <div class="footer-main">
+            
               <p class="footer-main-el hover">
                 Install
               </p>

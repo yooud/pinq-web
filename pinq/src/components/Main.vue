@@ -150,6 +150,7 @@ export default {
   .about-text{
     width: 48%;
     color: #fff;
+    padding: 0px 15px;
   }
   .about-img-wrapper{
     width: 48%;

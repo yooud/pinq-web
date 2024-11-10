@@ -15,6 +15,11 @@
               </router-link>  
             </li>
             <li class="header-nav-el">
+              <router-link class="header-nav-link" :to="{ name: 'faq' }">
+                FAQ
+              </router-link>  
+            </li>
+            <li class="header-nav-el">
               <router-link class="header-nav-link" :to="{ name: 'login' }">
                 Login/Register
               </router-link>  

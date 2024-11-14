@@ -1,20 +1,20 @@
 <template>
         <div class="faq-container">
-        <h1 class="faq-title">Frequently asked questions (FAQ)</h1>
-    
-        <div v-for="(item, index) in faqItems" :key="index" class="faq-item">
-            <div class="question-block">
-                <button class="faq-question" @click="toggleAnswer(index)">    
-                    {{ item.question }}
-                </button>
-                <svg class="svgstr" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
-                    <path d="M1.293 4.293a1 1 0 0 1 1.414 0L8 9.586l5.293-5.293a1 1 0 0 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"/>
-                </svg>
-            </div>
-            <div v-show="item.isOpen" class="faq-answer">
-            <p>{{ item.answer }}</p>
-            </div>
-        </div>
+          <h1 class="faq-title">Frequently asked questions (FAQ)</h1>
+      
+          <div v-for="(item, index) in faqItems" :key="index" class="faq-item">
+              <div class="question-block">
+                  <button class="faq-question" @click="toggleAnswer(index)">    
+                      {{ item.question }}
+                  </button>
+                  <svg class="svgstr" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
+                      <path d="M1.293 4.293a1 1 0 0 1 1.414 0L8 9.586l5.293-5.293a1 1 0 0 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"/>
+                  </svg>
+              </div>
+              <div v-show="item.isOpen" class="faq-answer">
+              <p>{{ item.answer }}</p>
+              </div>
+          </div>
         </div>
 
   </template>
@@ -25,33 +25,33 @@
       return {
         faqItems: [
           {
-            question: "Що таке FAQ?",
+            question: "What is FAQ?",
             answer:
-              "FAQ — це абревіатура від 'Frequently Asked Questions' (Часто задавані питання), що містить список найпоширеніших запитань і відповідей на них.",
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
             isOpen: false,
           },
           {
-            question: "Що таке FAQ?",
+            question: "What is FAQ?",
             answer:
-              "FAQ — це абревіатура від 'Frequently Asked Questions' (Часто задавані питання), що містить список найпоширеніших запитань і відповідей на них.",
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
             isOpen: false,
           },
           {
-            question: "Що таке FAQ?",
+            question: "What is FAQ?",
             answer:
-              "FAQ — це абревіатура від 'Frequently Asked Questions' (Часто задавані питання), що містить список найпоширеніших запитань і відповідей на них.",
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
             isOpen: false,
           },
           {
-            question: "Що таке FAQ?",
+            question: "What is FAQ?",
             answer:
-              "FAQ — це абревіатура від 'Frequently Asked Questions' (Часто задавані питання), що містить список найпоширеніших запитань і відповідей на них.",
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
             isOpen: false,
           },
           {
-            question: "Що таке FAQ?",
+            question: "What is FAQ?",
             answer:
-              "FAQ — це абревіатура від 'Frequently Asked Questions' (Часто задавані питання), що містить список найпоширеніших запитань і відповідей на них.",
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
             isOpen: false,
           },
         ],
@@ -71,7 +71,7 @@
   }
   .faq-container {
     width: 100%;
-    max-width: 1200px;
+    padding: 30px 100px 50px 100px !important;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

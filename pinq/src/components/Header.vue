@@ -14,15 +14,21 @@
                 Profile
               </router-link>  
             </li>
-            <li class="header-nav-el">
-              <router-link class="header-nav-link" :to="{ name: 'faq' }">
-                FAQ
-              </router-link>  
+            <li class="header-nav-el" @click = "scrollToElement('faq')">
+                <p class="header-nav-link">FAQ</p> 
+            </li>
+            <li class="header-nav-el" @click = "scrollToElement('about')">
+                <p class="header-nav-link">About Us</p> 
             </li>
             <li class="header-nav-el">
               <router-link class="header-nav-link" :to="{ name: 'login' }">
                 Login/Register
               </router-link>  
+            </li>
+            <li class="header-nav-el">
+              <div class="head-btn-wrapper">
+                <button class="head-btn1">Install</button>
+              </div>
             </li>
             <li class="header-nav-el">
               <button v-if="username" @click = "logout" class="header-nav-btn">
@@ -37,6 +43,22 @@
 </template>
 
 <style>
+.head-btn-wrapper{
+    display: flex;
+    justify-content: center;
+  }
+  .head-btn1{
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+  }
+  .head-btn1:hover {
+    box-shadow: 0px 5px 10px rgba(211, 176, 22, 0.5);
+    color: #967418;
+    animation: shadow-pulse 1s infinite;
+  }
 .header {
   padding: 10px 0;
   flex-grow: 0;
@@ -105,7 +127,17 @@ export default {
       localStorage.removeItem('username');
       this.$store.dispatch('logout')
       this.$router.push({name:'login'})
-    }
+    },
+    scrollToElement(el) {
+        setTimeout(()=>{
+          console.log("aaaa")
+          const element = document.getElementById(el);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        },1)
+        this.$router.push({name:'main'})
+      }
   },
   computed: {
     username() {

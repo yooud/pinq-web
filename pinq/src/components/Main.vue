@@ -1,6 +1,6 @@
 <template>
   <div class="lending-page">
-    <div class="head">
+    <div class="head" id = "install">
       <div class="container">
         <div class="head-wrapper">
           <h1 class="head-logo">
@@ -11,23 +11,6 @@
           </h3>
           <div class="head-btn-wrapper">
             <button class="head-btn">Install</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="about">
-      <div class="container">
-        <div class="about-wrapper">
-          <div class="about-text">
-            <h2 class="about-text-head">
-              About the App
-            </h2>
-            <p class="about-text-p">
-              Pinq is a mobile social networking app designed to enhance real-time connections. With GPS tracking, users can see their friends' locations on a map, send and receive instant messages, and get notifications when friends are nearby. pinq also enables users to discover new people with shared interests and explore exciting places around them. Privacy controls allow users to manage visibility by choosing who can see their location or setting location-sharing preferences for specific times or friends. Ideal for spontaneous meet-ups and group events, pinq keeps friends connected and helps users stay safe and social in real time.
-            </p>
-          </div>
-          <div class="about-img-wrapper">
-            <img src="../assets/about.jpg" alt="" class="about-img">
           </div>
         </div>
       </div>
@@ -78,6 +61,41 @@
         </div>
       </div>
     </div>
+    <div class="about" id = "about">
+      <div class="container">
+        <div class="about-wrapper">
+          <div class="about-text">
+            <h2 class="about-text-head">
+              About the App
+            </h2>
+            <p class="about-text-p">
+              Pinq is a mobile social networking app designed to enhance real-time connections. With GPS tracking, users can see their friends' locations on a map, send and receive instant messages, and get notifications when friends are nearby. pinq also enables users to discover new people with shared interests and explore exciting places around them. Privacy controls allow users to manage visibility by choosing who can see their location or setting location-sharing preferences for specific times or friends. Ideal for spontaneous meet-ups and group events, pinq keeps friends connected and helps users stay safe and social in real time.
+            </p>
+          </div>
+          <div class="about-img-wrapper">
+            <img src="../assets/about.jpg" alt="" class="about-img">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-container" id="faq">
+          <h1 class="faq-title">Frequently asked questions (FAQ)</h1>
+      
+          <div v-for="(item, index) in faqItems" :key="index" class="faq-item">
+              <div class="question-block">
+                  <button class="faq-question" @click="toggleAnswer(index)">    
+                      {{ item.question }}
+                  </button>
+                  <svg class="svgstr" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
+                      <path d="M1.293 4.293a1 1 0 0 1 1.414 0L8 9.586l5.293-5.293a1 1 0 0 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"/>
+                  </svg>
+              </div>
+              <div v-show="item.isOpen" class="faq-answer">
+              <p>{{ item.answer }}</p>
+              </div>
+          </div>
+        </div>
+
   </div>
 </template>
 <script>
@@ -90,13 +108,121 @@ export default {
     SwiperSlide
   },
   data() {
-    return {
-
-    };
-  },
+      return {
+        faqItems: [
+          {
+            question: "What is FAQ?",
+            answer:
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+            isOpen: false,
+          },
+          {
+            question: "What is FAQ?",
+            answer:
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+            isOpen: false,
+          },
+          {
+            question: "What is FAQ?",
+            answer:
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+            isOpen: false,
+          },
+          {
+            question: "What is FAQ?",
+            answer:
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+            isOpen: false,
+          },
+          {
+            question: "What is FAQ?",
+            answer:
+              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+            isOpen: false,
+          },
+        ],
+      };
+    },
+    methods: {
+      toggleAnswer(index) {
+        this.faqItems[index].isOpen = !this.faqItems[index].isOpen;
+      },
+      scrollToElement(el) {
+        this.$refs[el].scrollIntoView({ behavior: "smooth" });
+      }
+    },
 };
 </script>
 <style>
+.question-block{
+    position: relative;
+  }
+  .faq-container {
+    width: 100%;
+    padding: 30px 100px 50px 100px !important;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .faq-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: rgb(0, 0, 0);
+  }
+  
+  .faq-item {
+    width: 100%;
+  }
+  
+  .faq-question {
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    background-color: #000000;
+    color: white;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .question-block:hover .svgstr{
+    color: #000000;
+  }
+  .question-block:hover .faq-question{
+    background-color: #ffc965;
+    color: #000000;
+  }
+  
+  .faq-answer {
+    padding: 10px;
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+  }
+  
+  .faq-answer p {
+    margin: 0;
+  }
+  .svgstr{
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    color: #fff;
+    cursor: pointer;
+  }
   .head{
     display: flex;
     justify-content: center;
@@ -146,6 +272,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 30px;
   }
   .about-text{
     width: 48%;

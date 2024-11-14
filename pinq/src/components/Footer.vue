@@ -10,14 +10,12 @@
             </div>
             <div class="footer-main">
             
-              <p class="footer-main-el hover">
+              <p class="footer-main-el hover" @click ="scrollToElement('install')">
                 Install
               </p>
-              <p class="footer-main-el hover">About us</p>
-              <p class="footer-main-el hover">
-                <router-link class="header-nav-link" :to="{ name: 'faq' }">
+              <p class="footer-main-el hover" @click ="scrollToElement('about')">About us</p>
+              <p class="footer-main-el hover" @click ="scrollToElement('faq')">
                   FAQ
-                </router-link> 
               </p>
             </div>
             
@@ -34,6 +32,18 @@
     <script>
     export default {
     name: "FooterC",
+    methods: {
+      scrollToElement(el) {
+        setTimeout(()=>{
+          console.log("aaaa")
+          const element = document.getElementById(el);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        },1)
+        this.$router.push({name:'main'})
+      }
+    },
     };
     </script>
   

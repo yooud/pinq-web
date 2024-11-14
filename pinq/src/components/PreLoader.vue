@@ -36,7 +36,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(230, 149, 255, 0.7); /* Білий фон з 80% прозорістю */
+  background-color: rgba(163, 163, 163, 0.7); /* Білий фон з 80% прозорістю */
   z-index: 1;
 }
 

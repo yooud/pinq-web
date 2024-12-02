@@ -7,7 +7,12 @@
             <h1 class="logo">pinq</h1>
           </router-link> 
         </div>
-        <div class="header-nav">
+        <button class="burger-button" @click="toggleMenu">
+          <span :class="{ open: isOpen }"></span>
+          <span :class="{ open: isOpen }"></span>
+          <span :class="{ open: isOpen }"></span>
+        </button>
+        <div class="header-nav closed">
           <ul class="header-nav-list">
             <li class="header-nav-el">
               <router-link v-if="username" class="header-nav-link" :to="{ name: 'login' }">
@@ -38,7 +43,40 @@
           </ul>
         </div>
       </div>
+      <div class="burder-block openned" v-if = "isOpen">
+        <div class="header-nav" v-if = "isOpen">
+          <ul class="header-nav-list header-nav-list-burger">
+            <li class="header-nav-el">
+              <router-link v-if="username" class="header-nav-link" :to="{ name: 'login' }">
+                Profile
+              </router-link>  
+            </li>
+            <li class="header-nav-el" @click = "close();scrollToElement('faq')">
+                <p class="header-nav-link">FAQ</p> 
+            </li>
+            <li class="header-nav-el" @click = "scrollToElement('about');close()">
+                <p class="header-nav-link">About Us</p> 
+            </li>
+            <li class="header-nav-el">
+              <router-link class="header-nav-link" :to="{ name: 'login' }" @click = "close">
+                Login/Register
+              </router-link>  
+            </li>
+            <li class="header-nav-el btn-install">
+              <div class="head-btn-wrapper">
+                <button class="head-btn1">Install</button>
+              </div>
+            </li>
+            <li class="header-nav-el">
+              <button v-if="username" @click = "logout;close" class="header-nav-btn">
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <div class="block" v-if = "isOpen"></div>
   </header>
 </template>
 
@@ -112,6 +150,94 @@
     box-shadow: 0px 0px 8px rgba(218, 161, 40, 0.4);
   }
 }
+
+.burger-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px;
+}
+.burger-button span {
+  width: 30px;
+  height: 3px;
+  background-color: #ffffff;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.burger-button span.open:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.burger-button span.open:nth-child(2) {
+  opacity: 0;
+}
+.burger-button span.open:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+.header-nav-list-burger{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: fixed;
+  top: 43px;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 101;
+  background-color: #000
+}
+.btn-install{
+  margin-top: 20px;
+}
+.block{
+  display: none;
+  z-index: 100;
+  width: 100%;
+  height: 313vh;
+  position: absolute;
+  top: 150px;
+  left: 0;
+  background-color: #000;
+  opacity: .3;
+}
+@media (max-width: 1296px) {
+    .container {
+      max-width: 950px;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+      max-width: 100%;
+      padding: 0px 15px;
+    }
+    .burger-button {
+      display: flex;
+    }
+    .closed{
+      display: none;
+    }
+    .openned{
+      display: block
+    }
+    .block{
+      display: block;
+    }
+    .header-wrapper{
+      padding: 0px 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 75px;
+      font-display: flex;
+      justify-content: space-between;
+      background-color: #000;
+      width: 100%;
+    }
+}
+@media (max-width: 480px) {
+
+}
 </style>
 
 <script>
@@ -119,9 +245,13 @@ export default {
   name: "HeaderC",
   data() {
     return {
+      isOpen: false,
     };
   },
   methods: {
+    close(){
+      this.isOpen = false;
+    },
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('username');
@@ -137,7 +267,10 @@ export default {
           }
         },1)
         this.$router.push({name:'main'})
-      }
+    },
+    toggleMenu() {
+      this.isOpen = !this.isOpen;
+    },
   },
   computed: {
     username() {
@@ -146,7 +279,7 @@ export default {
         return localStorage.getItem('username')
       }
       return a;
-    }
+    },
   }
 };
 </script>

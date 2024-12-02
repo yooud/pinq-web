@@ -22,7 +22,7 @@
             Our Features
           </h2>
           <div class="feature-slider">
-            <swiper-container
+            <!-- <swiper-container
               :spaceBetween="30"
               :slides-per-view="2"
               :autoplay="{ delay: 3000, disableOnInteraction: false }"
@@ -56,7 +56,7 @@
                   <p>Connect with people nearby who share your interests.</p>
                 </div>
               </SwiperSlide>
-            </swiper-container>
+            </swiper-container> -->
           </div>
         </div>
       </div>
@@ -99,14 +99,14 @@
   </div>
 </template>
 <script>
-import {  SwiperSlide } from 'swiper/vue';
+// import {  SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 
 export default {
   name:'MainC',
-  components: {
-    SwiperSlide
-  },
+  // components: {
+    // SwiperSlide
+  // },
   data() {
       return {
         faqItems: [
@@ -331,5 +331,16 @@ export default {
   }
   .feature-content h3{
     padding: 15px;
+  }
+  @media (max-width: 1296px) {
+
+  }
+  @media (max-width: 768px) {
+    .lending-page{
+      padding-top: 50px;
+    }
+  }
+  @media (max-width: 480px) {
+
   }
 </style>

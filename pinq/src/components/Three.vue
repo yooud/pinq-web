@@ -1,98 +1,121 @@
 <template>
-  <div ref="planetContainer" class="planet-container"></div>
+  <div>
+    <h1 class="pinq-planet">Pinq</h1>
+    <div ref="planetContainer" class="planet-container"></div>
+  </div>
 </template>
 
 <script>
 import * as THREE from "three";
 
 export default {
-  name: "RotatingPlanet",
-  data() {
-    return {
-      scene: null,
-      camera: null,
-      renderer: null,
-      sphere: null,
-      animationId: null,
-    };
+  name: "ThreeDPlanet",
+  mounted() {
+    this.initScene();
+    this.addLighting();
+    this.createPlanet();
+    this.animate();
+    window.addEventListener("resize", this.onWindowResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.onWindowResize);
+    this.dispose();
   },
   methods: {
     initScene() {
-      // Сцена
+      // Создаем сцену
       this.scene = new THREE.Scene();
 
-      // Камера
+      // Создаем камеру
       this.camera = new THREE.PerspectiveCamera(
         75,
-        this.$refs.planetContainer.clientWidth / this.$refs.planetContainer.clientHeight,
+        window.innerWidth / window.innerHeight,
         0.1,
         1000
       );
-      this.camera.position.z = 3;
+      this.camera.position.z = 2; // Отодвигаем камеру назад
 
-      // Рендерер
-      this.renderer = new THREE.WebGLRenderer();
-      this.renderer.setSize(
-        this.$refs.planetContainer.clientWidth,
-        this.$refs.planetContainer.clientHeight
-      );
+      // Создаем рендерер
+      this.renderer = new THREE.WebGLRenderer({ antialias: true });
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.$refs.planetContainer.appendChild(this.renderer.domElement);
+    },
+    addLighting() {
+      // Добавляем источник света
+      const light = new THREE.PointLight(0xffffff, 1, 100);
+      light.position.set(5, 5, 5);
+      this.scene.add(light);
 
-      // Геометрия и текстура планеты
-      const geometry = new THREE.SphereGeometry(1, 32, 32);
+
+      const ambientLight = new THREE.AmbientLight(0x404040, 1); // мягкий свет
+      this.scene.add(ambientLight);
+
+      // Направленный свет (для усиления эффекта освещенности)
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // яркий белый свет
+      directionalLight.position.set(5, 5, 5).normalize(); // позиция источника света
+      this.scene.add(directionalLight);
+    },
+    createPlanet() {
+      // Создаем геометрию сферы
+      const geometry = new THREE.SphereGeometry(1, 64, 64);
+
+      // Загружаем текстуру поверхности
       const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load(
-        "https://threejsfundamentals.org/threejs/resources/images/earth-day.jpg"
-      );
-      const material = new THREE.MeshBasicMaterial({ map: texture });
+      const texture = textureLoader.load("../assets/planet.jpg");
 
-      // Сфера (планета)
-      this.sphere = new THREE.Mesh(geometry, material);
-      this.scene.add(this.sphere);
+      // Создаем материал
+      const material = new THREE.MeshStandardMaterial({
+        map: texture,
+      });
 
-      // Анимация
-      this.animate();
+      // Создаем объект Mesh (сфера + материал)
+      this.planet = new THREE.Mesh(geometry, material);
+      
+      this.scene.add(this.planet);
     },
     animate() {
+      // Анимация
       this.animationId = requestAnimationFrame(this.animate);
-      this.sphere.rotation.y += 0.01; // Вращение по оси Y
-      this.renderer.render(this.scene, this.camera);
-    },
-    resizeRenderer() {
-      if (this.renderer) {
-        const container = this.$refs.planetContainer;
-        this.camera.aspect = container.clientWidth / container.clientHeight;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(container.clientWidth, container.clientHeight);
+      if (this.planet) {
+        this.planet.rotation.y += 0.01; // Вращение по оси Y
       }
+      this.renderer.render(this.scene, this.camera); // Рендер сцены
     },
-    cleanup() {
+    onWindowResize() {
+      // Адаптируем камеру и рендерер под размер окна
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    },
+    dispose() {
+      // Очищаем ресурсы Three.js
       cancelAnimationFrame(this.animationId);
       this.renderer.dispose();
-      this.sphere.geometry.dispose();
-      this.sphere.material.dispose();
-      this.scene = null;
-      this.camera = null;
-      this.renderer = null;
-      this.sphere = null;
+      this.scene.traverse((object) => {
+        if (object.isMesh) {
+          object.geometry.dispose();
+          if (object.material.map) object.material.map.dispose();
+          object.material.dispose();
+        }
+      });
     },
-  },
-  mounted() {
-    this.initScene();
-    window.addEventListener("resize", this.resizeRenderer);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.resizeRenderer);
-    this.cleanup();
   },
 };
 </script>
 
-<style scoped>
+<style>
 .planet-container {
   width: 100%;
   height: 100vh;
   overflow: hidden;
   position: relative;
 }
+.pinq-planet{
+  background-color: black;
+  text-align: center;
+  color: #fff;
+  padding-top: 25px;
+  font-size: 45px;
+}
+
 </style>

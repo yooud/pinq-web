@@ -1,5 +1,8 @@
 <template>
   <div class="lending-page">
+    <div class = "planet">
+      <Three></Three>
+    </div>
     <div class="head" id = "install">
       <div class="container">
         <div class="head-wrapper">
@@ -100,12 +103,14 @@
 </template>
 <script>
 import {  SwiperSlide } from 'swiper/vue';
+import Three from "./Three.vue";
 import 'swiper/swiper-bundle.css';
 
 export default {
   name:'MainC',
   components: {
-    SwiperSlide
+    SwiperSlide,
+    Three
   },
   mounted() {
     window.addEventListener("resize", this.updateWidth);

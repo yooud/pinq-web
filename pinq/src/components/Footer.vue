@@ -18,10 +18,11 @@
                   FAQ
               </p>
             </div>
-            
-            <div class="footer-social">
-              <div class="footer-social-block">
-                <svg class="svg" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M21 5L2 12.5L9 13.5M21 5L18.5 20L9 13.5M21 5L9 13.5M9 13.5V19L12.2488 15.7229" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <div class="footer-social-b">
+              <div class="footer-social">
+                <div class="footer-social-block">
+                  <svg class="svg" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M21 5L2 12.5L9 13.5M21 5L18.5 20L9 13.5M21 5L9 13.5M9 13.5V19L12.2488 15.7229" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </div>
               </div>
             </div>
         </div>
@@ -91,6 +92,35 @@
     padding: 1px 4px 1px 3px;
     border: 1px solid #fff;
     border-radius: 100%;
+    width: 35px;
+  }
+  .footer-social{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 1296px) {
+    .footer-logo, .footer-main{
+      width: 33%;
+    }
+  }
+  @media (max-width: 768px) {
+    .footer-social-b{
+      width: 33%;
+    }
+    .footer-logo, .footer-main{
+      flex-direction: column;
+      gap: 5px;
+      text-align: center;
+      width: 33%;
+    }
+    .about-wrapper{
+      padding: 0 !important;
+    }
+  }
+  @media (max-width: 480px) {
+
   }
   </style>
   

@@ -166,6 +166,9 @@
   background-color: #ffffff;
   transition: transform 0.3s, opacity 0.3s;
 }
+.header{
+  z-index: 10000;
+}
 .burger-button span.open:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -192,19 +195,17 @@
 }
 .block{
   display: none;
-  z-index: 100;
+  z-index: 1001;
   width: 100%;
-  height: 313vh;
-  position: absolute;
-  top: 150px;
+  height: 100%;
+  position: fixed;
+  top: 308px;
   left: 0;
   background-color: #000;
   opacity: .3;
 }
 @media (max-width: 1296px) {
-    .container {
-      max-width: 950px;
-    }
+
 }
 @media (max-width: 768px) {
     .container {

@@ -22,9 +22,9 @@
             Our Features
           </h2>
           <div class="feature-slider">
-            <!-- <swiper-container
+            <swiper-container
               :spaceBetween="30"
-              :slides-per-view="2"
+              :slides-per-view="slides"
               :autoplay="{ delay: 3000, disableOnInteraction: false }"
               loop = "true"
               class="mySwiper"
@@ -56,7 +56,7 @@
                   <p>Connect with people nearby who share your interests.</p>
                 </div>
               </SwiperSlide>
-            </swiper-container> -->
+            </swiper-container>
           </div>
         </div>
       </div>
@@ -99,14 +99,20 @@
   </div>
 </template>
 <script>
-// import {  SwiperSlide } from 'swiper/vue';
+import {  SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 
 export default {
   name:'MainC',
-  // components: {
-    // SwiperSlide
-  // },
+  components: {
+    SwiperSlide
+  },
+  mounted() {
+    window.addEventListener("resize", this.updateWidth);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.updateWidth);
+  },
   data() {
       return {
         faqItems: [
@@ -141,15 +147,29 @@ export default {
             isOpen: false,
           },
         ],
+        slides:2,
+        windowWidth: window.innerWidth,
       };
     },
+    watch:{
+      windowWidth(){
+        if(this.windowWidth < 1000){
+          this.slides = 1
+        }else{
+          this.slides = 2
+        }
+      }
+    }, 
     methods: {
       toggleAnswer(index) {
         this.faqItems[index].isOpen = !this.faqItems[index].isOpen;
       },
       scrollToElement(el) {
         this.$refs[el].scrollIntoView({ behavior: "smooth" });
-      }
+      },
+      updateWidth() {
+        this.windowWidth = window.innerWidth;
+      },
     },
 };
 </script>
@@ -244,6 +264,7 @@ export default {
     margin-bottom: 5px;
   }
   .head-sloggan{
+    text-align: center;
     font-weight: 300;
     font-style: italic;
     margin-bottom: 25px;
@@ -333,14 +354,43 @@ export default {
     padding: 15px;
   }
   @media (max-width: 1296px) {
-
+    .about-wrapper{
+      flex-direction: column;
+      text-align: center;
+      gap: 30px
+    }
+    .about-text{
+      width: 100%;
+    }
+    .about-img-wrapper{
+      width: 90%;
+    }
+    .feature-slider{
+      width: 90%;
+    }
+    .features-img-block{
+      width: 200px;
+      height: 200px;
+    }
   }
   @media (max-width: 768px) {
     .lending-page{
       padding-top: 50px;
     }
+    .faq-container{
+      padding: 15px !important;
+    }
+    .faq-answer{
+      text-align: center;
+    }
+    .features-img-block{
+      width: 200px;
+      height: 200px;
+    }
   }
   @media (max-width: 480px) {
-
+    .features-head{
+      width: 50%;
+    }
   }
 </style>

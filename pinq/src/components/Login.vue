@@ -142,4 +142,22 @@ export default {
     color: #fff;
     user-select: none;
   }
+  @media (max-width: 1296px) {
+    .login{
+      padding-top: 90px;
+      padding-bottom: 30px;
+    }
+  }
+  @media (max-width: 768px) {
+    .password-block, .login-other{
+      text-align: center;
+    }
+
+  }
+  @media (max-width: 480px) {
+    .login-wrapper{
+      width: 50vh;
+    }
+
+  }
 </style>

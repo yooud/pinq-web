@@ -112,6 +112,14 @@ export default {
     SwiperSlide,
     Three
   },
+  created() {
+    this.updateWidth();
+    if(this.windowWidth < 1000){
+          this.slides = 1
+        }else{
+          this.slides = 2
+        }
+  },
   mounted() {
     window.addEventListener("resize", this.updateWidth);
   },

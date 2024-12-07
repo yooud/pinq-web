@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <Header></Header>
-    <main class="main">
+    <Header v-if="!isAdmin"></Header>
+    <main class="main" :style = "main">
       <router-view></router-view>
     </main>
-    <Footer></Footer>
+    <Footer v-if="!isAdmin"></Footer>
   </div>
 </template>
 
@@ -16,6 +16,18 @@ export default {
   components: {
     Header,
     Footer
+  },
+  data() {
+    return {
+      isAdmin: false,
+      main: '',
+    };
+  },
+  created() {
+    if (window.location.href.includes('admin')) {
+      this.isAdmin = true;
+      this.main = 'height: 100vh;display:block !important;'
+    }
   },
 };
 </script>

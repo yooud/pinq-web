@@ -3,6 +3,7 @@ import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Main from '../components/Main.vue'
 import FAQ from '../components/FAQ.vue'
+import Admin from '../components/Admin.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/faq',
     name: 'faq',
     component: FAQ
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin
   }
 ]
 

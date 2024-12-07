@@ -1,6 +1,6 @@
 <template>
+  <h1 class="contant-name">{{Title}}</h1>
   <div class="table-wrapper">
-    <h1 class="contant-name">{{Title}}</h1>
     <!-- Таблица для отображения записей -->
     <table>
       <thead>
@@ -11,9 +11,7 @@
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.password }}</td>
+          <td v-for="key in Object.keys(item)" :key="key">{{item[key]}}</td>
           <td>
             <button @click="editItem(item.id)">Редактировать</button>
             <button @click="deleteItem(item.id)">Удалить</button>
@@ -26,7 +24,7 @@
     <div v-if="isEditing" class="modal-overlay" @click.self="closeModal">
       <div class="modal">
         <h3>Редактировать запись</h3>
-        <form @submit.prevent="saveItem">
+        <form>
           <div>
             <label class = "edit-name" for="name">Название</label>
             <input type="text" v-model="currentItem.name" id="name" />
@@ -36,7 +34,7 @@
             <input type="text" v-model="currentItem.password" id="password" />
           </div>
           <div class="modal-buttons">
-            <button type="submit">Сохранить</button>
+            <button type="submit" @click = "saveItem">Сохранить</button>
             <button type="button" @click="closeModal">Canel</button>
           </div>
         </form>
@@ -73,7 +71,7 @@ export default {
   methods: {
     async fetchItems() {
       this.items = [
-        { id: 1, name: "Item 1", password: "password 1" },
+        { id: 1, name: "Item 1", password: "password 1"},
         { id: 2, name: "Item 2", password: "password 2" },
         { id: 3, name: "Item 3", password: "password 3" },
         { id: 4, name: "Item 1", password: "password 1" },
@@ -87,7 +85,7 @@ export default {
 
     editItem(id) {
       this.isEditing = true;
-      this.currentItem = this.items.find(item => item.id === id);
+      this.currentItem = {...this.items.find(item => item.id === id)};
     },
 
     // Сохранить изменения и закрыть модальное окно
@@ -176,6 +174,8 @@ form div {
 }
 td{
     text-align: center;
+    word-wrap: break-word;
+    max-width: 100px;
 }
 .contant-name{
   font-size: 35px;

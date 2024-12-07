@@ -61,7 +61,7 @@ export default {
 
       // Загружаем текстуру поверхности
       const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load("../assets/planet.jpg");
+      const texture = textureLoader.load("../assets/planet2.jpg");
 
       // Создаем материал
       const material = new THREE.MeshStandardMaterial({
@@ -71,6 +71,13 @@ export default {
       // Создаем объект Mesh (сфера + материал)
       this.planet = new THREE.Mesh(geometry, material);
       
+      // Уменьшаем размер планеты в зависимости от ширины экрана
+      if (window.innerWidth < 500) {
+        this.planet.scale.set(0.5, 0.7, 0.7); // уменьшение размера для маленьких экранов
+      } else {
+        this.planet.scale.set(0.9, 0.9, 0.9); // стандартный размер
+      }
+
       this.scene.add(this.planet);
     },
     animate() {
@@ -106,7 +113,6 @@ export default {
 <style>
 .planet-container {
   width: 100%;
-  height: 100vh;
   overflow: hidden;
   position: relative;
 }

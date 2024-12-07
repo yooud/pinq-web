@@ -366,6 +366,11 @@ export default {
   .feature-content h3{
     padding: 15px;
   }
+  
+  canvas {
+    width: 100% !important;
+    height: 500px !important;
+  }
   @media (max-width: 1296px) {
     .about-wrapper{
       flex-direction: column;
@@ -405,5 +410,9 @@ export default {
     .features-head{
       width: 50%;
     }
+    canvas {
+    width: 100% !important;
+    height: 350px !important;
+  }
   }
 </style>

@@ -16,6 +16,10 @@ export default {
     this.createPlanet();
     this.animate();
     window.addEventListener("resize", this.onWindowResize);
+    this.$watch(
+      () => this.$store.getters.getTheme,
+      this.updateBackgroundColor
+    );
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.onWindowResize);
@@ -38,7 +42,11 @@ export default {
       // Создаем рендерер
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
       this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setClearColor(0xeeeded);
       this.$refs.planetContainer.appendChild(this.renderer.domElement);
+
+      // Set the initial background color based on the theme
+      this.updateBackgroundColor(this.$store.getters.getTheme);
     },
     addLighting() {
       // Добавляем источник света
@@ -105,6 +113,10 @@ export default {
           object.material.dispose();
         }
       });
+    },
+    updateBackgroundColor(theme) {
+      const color = theme ? 0xeeeded : 0x000000; // white for light theme, black for dark theme
+      this.renderer.setClearColor(color);
     },
   },
 };

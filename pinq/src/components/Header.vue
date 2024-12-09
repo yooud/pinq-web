@@ -8,11 +8,11 @@
           </router-link> 
         </div>
         <button class="burger-button" @click="toggleMenu">
-          <span :class="{ open: isOpen }"></span>
-          <span :class="{ open: isOpen }"></span>
-          <span :class="{ open: isOpen }"></span>
+          <span :class="{ open: isOpen, 'light-burger':this.$store.getters.getTheme }"></span>
+          <span :class="{ open: isOpen, 'light-burger':this.$store.getters.getTheme }"></span>
+          <span :class="{ open: isOpen, 'light-burger':this.$store.getters.getTheme }"></span>
         </button>
-        <div class="header-nav closed">
+        <div class="header-nav closed" >
           <ul class="header-nav-list">
             <li class="header-nav-el" >
               <router-link v-if="username" :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'login' }">
@@ -41,6 +41,7 @@
               </button>
             </li>
             <div class="theme-switcher header-nav-el">
+              <span :class="{'theme':true,'theme1':theme}">Theme</span>
               <input 
                 type="checkbox" 
                 id="theme-toggle" 
@@ -58,26 +59,26 @@
       </div>
       <div class="burder-block openned" v-if = "isOpen">
         <div class="header-nav" v-if = "isOpen">
-          <ul class="header-nav-list header-nav-list-burger">
+          <ul class="header-nav-list header-nav-list-burger" :class="{ 'light':this.$store.getters.getTheme }">
             <li class="header-nav-el">
-              <router-link v-if="username" class="header-nav-link" :to="{ name: 'login' }">
+              <router-link v-if="username" :class="{'black-color':this.$store.getters.getTheme}" class="header-nav-link" :to="{ name: 'login' }">
                 Profile
               </router-link>  
             </li>
             <li class="header-nav-el" @click = "close();scrollToElement('faq')">
-                <p class="header-nav-link">FAQ</p> 
+                <p class="header-nav-link" :class="{'black-color':this.$store.getters.getTheme}">FAQ</p> 
             </li>
             <li class="header-nav-el" @click = "scrollToElement('about');close()">
-                <p class="header-nav-link">About Us</p> 
+                <p class="header-nav-link" :class="{'black-color':this.$store.getters.getTheme}">About Us</p> 
             </li>
             <li class="header-nav-el">
-              <router-link class="header-nav-link" :to="{ name: 'login' }" @click = "close">
+              <router-link class="header-nav-link" :class="{'black-color':this.$store.getters.getTheme}" :to="{ name: 'login' }" @click = "close">
                 Login/Register
               </router-link>  
             </li>
             <li class="header-nav-el btn-install">
               <div class="head-btn-wrapper">
-                <button class="head-btn1">Install</button>
+                <button class="head-btn1" :class="{'light-btn':this.$store.getters.getTheme}">Install</button>
               </div>
             </li>
             <li class="header-nav-el">
@@ -85,6 +86,20 @@
                 Logout
               </button>
             </li>
+            <div class="theme-switcher header-nav-el">
+              <span :class="{'theme':true,'theme1':theme}">Theme</span>
+              <input 
+                type="checkbox" 
+                id="theme-toggle" 
+                v-model="theme" 
+                @change="toggleTheme" 
+              />
+              <label for="theme-toggle">
+                <span class="toggle">
+                  <span class="circle"></span>
+                </span>
+              </label>
+            </div>
           </ul>
         </div>
       </div>
@@ -212,7 +227,7 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  top: 308px;
+  top: 345px;
   left: 0;
   background-color: #000;
   opacity: .3;

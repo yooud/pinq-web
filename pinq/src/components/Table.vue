@@ -13,8 +13,8 @@
         <tr v-for="item in items" :key="item.id">
           <td v-for="key in Object.keys(item)" :key="key">{{item[key]}}</td>
           <td>
-            <button @click="editItem(item.id)">Редактировать</button>
-            <button @click="deleteItem(item.id)">Удалить</button>
+            <button @click="editItem(item.id)">Edit</button>
+            <button @click="deleteItem(item.id)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -23,10 +23,10 @@
     <!-- Форма для редактирования записи -->
     <div v-if="isEditing" class="modal-overlay" @click.self="closeModal">
       <div class="modal">
-        <h3>Редактировать запись</h3>
+        <h3>Edit record</h3>
         <form>
           <div>
-            <label class = "edit-name" for="name">Название</label>
+            <label class = "edit-name" for="name">Name</label>
             <input type="text" v-model="currentItem.name" id="name" />
           </div>
           <div>
@@ -34,7 +34,7 @@
             <input type="text" v-model="currentItem.password" id="password" />
           </div>
           <div class="modal-buttons">
-            <button type="submit" @click = "saveItem">Сохранить</button>
+            <button type="submit" @click = "saveItem">Save</button>
             <button type="button" @click="closeModal">Canel</button>
           </div>
         </form>

@@ -66,3 +66,14 @@ html, body {
   background-color: #bbbbbb !important;
   color: black !important;
 }
+.light-burger{
+  background-color: #000 !important;
+  color: #000;
+}
+.theme{
+  color: #fff;
+  margin-right: -5px;
+}
+.theme1{
+  color: #000 !important;
+}

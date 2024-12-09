@@ -4,7 +4,8 @@ import router from '../router/index.js';
 export default createStore({
   state: {
     user:[],
-    load:false
+    load:false,
+    theme: false,
   },
   getters: {
     getUser(state){
@@ -12,6 +13,9 @@ export default createStore({
     },
     getLoad(state){
       return state.load
+    },
+    getTheme(state){
+      return state.theme
     },
   },
   mutations: {
@@ -23,6 +27,9 @@ export default createStore({
     },
     setLoad(state,payload){
       state.load = payload
+    },
+    setTheme(state){
+      state.theme = !state.theme
     },
   },
   actions: {
@@ -67,6 +74,9 @@ export default createStore({
   async logout({ commit }) {
     commit('logout',[])
   },
+  setTheme({commit}){
+    commit('setTheme')
+  }
   },
   modules: {
   }

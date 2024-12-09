@@ -2,34 +2,34 @@
     <div class="login">
       <PreLoader :loading = "load"></PreLoader>
       <div class="container">
-        <div class="login-wrapper">
-          <h2 class="login-head">Register</h2>
+        <div :class="{'login-wrapper':true,'light':this.$store.getters.getTheme}">
+          <h2 :class="{'login-head':true,'light':this.$store.getters.getTheme}">Register</h2>
           <input
             type="text"
-            class="login-input"
+            :class="{'login-input':true,'input-light':this.$store.getters.getTheme}"
             v-model="username"
             placeholder="Username"
           />
           <input
             :type="showPassword ? 'text' : 'password'" 
-            class="login-input"
+            :class="{'login-input':true,'input-light':this.$store.getters.getTheme}"
             v-model="password"
             placeholder="Password"
           />
           <div class="password-block">
             <input
               :type="showPassword ? 'text' : 'password'" 
-              class="login-input"
+              :class="{'login-input':true,'input-light':this.$store.getters.getTheme}"
               v-model="password1"
               placeholder="Password"
             />
-            <label class="password-check">
-              <input type="checkbox" v-model="showPassword" />
+            <label class="password-check" :class="{'black-color':this.$store.getters.getTheme}">
+              <input type="checkbox" class = "check" v-model="showPassword" />
               Show password
             </label>
           </div>
           <div class="login-btn">
-            <button class="login-btn-button" @click="tryRegister">Register</button>
+            <button class="login-btn-button" :class="{'light-btn':this.$store.getters.getTheme}" @click="tryRegister">Register</button>
           </div>
         </div>
       </div>

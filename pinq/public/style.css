@@ -40,3 +40,29 @@ html, body {
   #app {
     height: 100%;
   }
+
+.light{
+  background-color: #eeeded !important;
+  color: black !important;
+}
+.light1{
+  background-color: #eeeded !important;
+  color: black !important;
+}
+.black-color{
+  color: black !important;
+}
+.light-btn{
+  background-color: #000 !important;
+  color: #fff !important;
+}
+.stroke{
+  stroke: #000 !important;
+}
+.stroke1{
+  border: 1px solid #000 !important;
+}
+.input-light{
+  background-color: #bbbbbb !important;
+  color: black !important;
+}

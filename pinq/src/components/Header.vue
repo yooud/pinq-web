@@ -1,10 +1,10 @@
 <template>
-  <header class="header">
+  <header :class="{'header':true,'light':theme}">
     <div class="container">
-      <div class="header-wrapper">
+      <div :class="{'header-wrapper':true,'light':theme}">
         <div class="header-logo">
           <router-link :to="{ name: 'main' }">
-            <h1 class="logo">pinq</h1>
+            <h1 :class="{'logo':true,'black-color':theme}">pinq</h1>
           </router-link> 
         </div>
         <button class="burger-button" @click="toggleMenu">
@@ -14,25 +14,25 @@
         </button>
         <div class="header-nav closed">
           <ul class="header-nav-list">
-            <li class="header-nav-el">
-              <router-link v-if="username" class="header-nav-link" :to="{ name: 'login' }">
+            <li class="header-nav-el" >
+              <router-link v-if="username" :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'login' }">
                 Profile
               </router-link>  
             </li>
             <li class="header-nav-el" @click = "scrollToElement('faq')">
-                <p class="header-nav-link">FAQ</p> 
+                <p :class="{'header-nav-link':true,'black-color':theme}">FAQ</p> 
             </li>
             <li class="header-nav-el" @click = "scrollToElement('about')">
-                <p class="header-nav-link">About Us</p> 
+                <p :class="{'header-nav-link':true,'black-color':theme}">About Us</p> 
             </li>
             <li class="header-nav-el">
-              <router-link class="header-nav-link" :to="{ name: 'login' }">
+              <router-link :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'login' }">
                 Login/Register
               </router-link>  
             </li>
             <li class="header-nav-el">
               <div class="head-btn-wrapper">
-                <button class="head-btn1">Install</button>
+                <button :class="{'head-btn1':true,'light-btn':theme}">Install</button>
               </div>
             </li>
             <li class="header-nav-el">
@@ -40,6 +40,19 @@
                 Logout
               </button>
             </li>
+            <div class="theme-switcher header-nav-el">
+              <input 
+                type="checkbox" 
+                id="theme-toggle" 
+                v-model="theme" 
+                @change="toggleTheme" 
+              />
+              <label for="theme-toggle">
+                <span class="toggle">
+                  <span class="circle"></span>
+                </span>
+              </label>
+            </div>
           </ul>
         </div>
       </div>
@@ -239,6 +252,55 @@
 @media (max-width: 480px) {
 
 }
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle .circle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]:checked + label .toggle {
+  background-color: #000000;
+}
+
+input[type="checkbox"]:checked + label .circle {
+  transform: translateX(26px);
+}
+
+.text {
+  font-size: 16px;
+  color: var(--text-color, #fff);
+  margin-left: 10px;
+}
 </style>
 
 <script>
@@ -247,9 +309,16 @@ export default {
   data() {
     return {
       isOpen: false,
+      theme: false,
     };
   },
+  mounted() {
+    this.theme = this.$store.getters.getTheme
+  },
   methods: {
+    toggleTheme() {
+      this.$store.dispatch('setTheme')
+    },
     close(){
       this.isOpen = false;
     },

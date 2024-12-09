@@ -5,7 +5,7 @@
     </div>
     <div class="head" id = "install">
       <div class="container">
-        <div class="head-wrapper">
+        <div :class="{'head-wrapper':true,'light':this.$store.getters.getTheme}">
           <h1 class="head-logo">
             pinq
           </h1>
@@ -13,7 +13,7 @@
             Keep your friends closer, stay in touch in real time!
           </h3>
           <div class="head-btn-wrapper">
-            <button class="head-btn">Install</button>
+            <button :class="{'head-btn':true,'light-btn':this.$store.getters.getTheme}">Install</button>
           </div>
         </div>
       </div>
@@ -64,14 +64,14 @@
         </div>
       </div>
     </div>
-    <div class="about" id = "about">
+    <div :class="{'about':true,'light':this.$store.getters.getTheme}" id = "about">
       <div class="container">
-        <div class="about-wrapper">
+        <div :class="{'about-wrapper':true}">
           <div class="about-text">
-            <h2 class="about-text-head">
+            <h2 :class="{'about-text-head':true,'black-color':this.$store.getters.getTheme}">
               About the App
             </h2>
-            <p class="about-text-p">
+            <p :class="{'about-text-p':true,'black-color':this.$store.getters.getTheme}">
               Pinq is a mobile social networking app designed to enhance real-time connections. With GPS tracking, users can see their friends' locations on a map, send and receive instant messages, and get notifications when friends are nearby. pinq also enables users to discover new people with shared interests and explore exciting places around them. Privacy controls allow users to manage visibility by choosing who can see their location or setting location-sharing preferences for specific times or friends. Ideal for spontaneous meet-ups and group events, pinq keeps friends connected and helps users stay safe and social in real time.
             </p>
           </div>
@@ -84,9 +84,9 @@
     <div class="faq-container" id="faq">
           <h1 class="faq-title">Frequently asked questions (FAQ)</h1>
       
-          <div v-for="(item, index) in faqItems" :key="index" class="faq-item">
-              <div class="question-block">
-                  <button class="faq-question" @click="toggleAnswer(index)">    
+          <div v-for="(item, index) in faqItems" :key="index" :class="{'faq-item':true}">
+              <div :class="{'question-block':true,'light':this.$store.getters.getTheme}">
+                  <button :class="{'faq-question':true,'light':this.$store.getters.getTheme}" @click="toggleAnswer(index)">    
                       {{ item.question }}
                   </button>
                   <svg class="svgstr" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
@@ -122,12 +122,14 @@ export default {
   },
   mounted() {
     window.addEventListener("resize", this.updateWidth);
+    this.theme = this.$store.getters.getTheme
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.updateWidth);
   },
   data() {
       return {
+        theme: false,
         faqItems: [
           {
             question: "What is FAQ?",
@@ -318,6 +320,8 @@ export default {
   }
   .about-img{
     width: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
   }
   .about-text-head{
     font-size: 40px;

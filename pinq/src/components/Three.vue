@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="pinq-planet">Pinq</h1>
-    <div ref="planetContainer" class="planet-container"></div>
+    <h1 :class="{'pinq-planet':true,'light':this.$store.getters.getTheme}">Pinq</h1>
+    <div ref="planetContainer" :class="{'planet-container':true,'light':this.$store.getters.getTheme}"></div>
   </div>
 </template>
 

@@ -2,11 +2,11 @@
   <div class="login">
     <PreLoader :loading = "load"></PreLoader>
     <div class="container">
-      <div class="login-wrapper">
-        <h2 class="login-head">Account Log in</h2>
+      <div :class="{'login-wrapper':true,'light':this.$store.getters.getTheme}">
+        <h2 :class="{'login-head':true,'light1':this.$store.getters.getTheme}">Account Log in</h2>
         <input
           type="text"
-          class="login-input"
+          :class="{'login-input':true,'input-light':this.$store.getters.getTheme}"
           v-model="username"
           placeholder="Username"
         />
@@ -14,22 +14,23 @@
           <input
             :type="showPassword ? 'text' : 'password'" 
             class="login-input"
+            :class="{'login-input':true,'input-light':this.$store.getters.getTheme}"
             v-model="password"
             placeholder="Password"
           />
-          <label class="password-check">
-            <input type="checkbox" v-model="showPassword" />
+          <label class="password-check" :class="{'black-color':this.$store.getters.getTheme}">
+            <input type="checkbox" class = "check" v-model="showPassword" />
             Show password
           </label>
         </div>
         
         <div class="login-btn">
-          <button class="login-btn-button" @click="tryLogin">Log in</button>
+          <button class="login-btn-button" :class="{'light-btn':this.$store.getters.getTheme}" @click="tryLogin">Log in</button>
         </div>
         <div class="login-other">
-          <p class="login-other-f">Forgot passwod?</p>
+          <p :class="{'login-other-f':true,'black-color':this.$store.getters.getTheme}">Forgot passwod?</p>
           <router-link :to="{ name: 'register' }">
-            <p class="login-other-f">Register Now</p>
+            <p class="login-other-f" :class="{'black-color':this.$store.getters.getTheme}">Register Now</p>
           </router-link>
         </div>
       </div>
@@ -159,5 +160,10 @@ export default {
       width: 50vh;
     }
 
+  }
+  .check{
+    display: block !important;
+    cursor: pointer;
+    margin-right: 5px;
   }
 </style>

@@ -88,6 +88,7 @@ export default createStore({
     commit('setTheme')
   },
   async getAdminInfo({ commit }) {
+      commit('setLoad',true)
       const token = localStorage.getItem('token1');
       let response = await fetch("https://api.pinq.yooud.org/admin/user", {
         method: "GET",
@@ -97,7 +98,15 @@ export default createStore({
         }
       })
       let res = await response.json();
+      res.data.forEach((el) => {
+        const date = new Date(el.created_at * 1000);
+        el.created_at = date.toDateString();
+        el.username = el.profile.username;
+        el.last_activity  = el.profile.last_activity;
+        delete el.profile
+      });
       commit('setAdminInfo', res);
+      commit('setLoad',false)
     },
     async modifyRole({ commit },payload){
       const token = localStorage.getItem('token1');

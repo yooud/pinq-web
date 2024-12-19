@@ -107,22 +107,12 @@ export default {
       if(a === undefined){
         return [];
       }
-      if(this.first){
-        a.forEach((el) => {
-          const date = new Date(el.created_at * 1000);
-          el.created_at = date.toDateString();
-          el.username = el.profile.username;
-          el.last_activity  = el.profile.last_activity;
-          delete el.profile
-        });
-        this.changeFirst();
-      }
       return [...a];
     },
     filteredItems() {
       let filtered = this.items;
       if (this.searchQuery) {
-        filtered = filtered.filter(item => item.username.toLowerCase().includes(this.searchQuery.toLowerCase()));
+        filtered = filtered.filter(item => item?.username.toLowerCase().includes(this.searchQuery.toLowerCase()));
       }
       filtered = filtered.filter(item => {
         if (item.role === 'admin' && !this.showAdmin) return false;

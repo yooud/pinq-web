@@ -72,8 +72,9 @@ export default {
       }) 
     },
     loginWithGoogle() {
+      console.log(process.env.VUE_APP_FIREBASE_API_KEY)
         const firebaseConfig = {
-          apiKey: "AIzaSyBuqpElC_1QAsocdTzAjyQR7BQ9cdWdpgg",
+          apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
             authDomain: "pinq-nure.firebaseapp.com",
             projectId: "pinq-nure",
         };

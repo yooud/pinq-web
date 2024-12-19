@@ -63,19 +63,21 @@ export default {
       this.selected = item;
     }
   },
+  computed:{
+    
+  }
 };
 </script>
 
 <style scoped>
 .container1 {
   display: block;
-  height: 100vh;
   width: 100%;
 }
 
 .menu-toggle {
   position: absolute;
-  top: 20px;
+  top: 110px;
   left: 20px;
   cursor: pointer;
 }
@@ -94,7 +96,7 @@ export default {
   color: #ffffff;
   z-index: 100;
   position: absolute;
-  top: 0px;
+  top: 95px;
   right: 20px;  
   cursor: pointer;
 }
@@ -104,6 +106,8 @@ export default {
   background-color: #000000;
   color: white;
   padding: 15px;
+  padding-right: 50px;
+  padding-top: 75px;
   position: fixed;
   left: -250px; /* Початкове положення (за межами екрану) */
   top: 0;

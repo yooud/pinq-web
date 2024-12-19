@@ -6,6 +6,7 @@ export default createStore({
     user:[],
     load:false,
     theme: false,
+    adminInfo:[],
   },
   getters: {
     getUser(state){
@@ -17,6 +18,9 @@ export default createStore({
     getTheme(state){
       return state.theme
     },
+    getAdminInfo(state){
+      return state.adminInfo
+    }
   },
   mutations: {
     setUser(state,payload){
@@ -31,6 +35,9 @@ export default createStore({
     setTheme(state){
       state.theme = !state.theme
     },
+    setAdminInfo(state,payload){
+      state.adminInfo = payload
+    }
   },
   actions: {
     async login({ commit }, payload) {
@@ -74,9 +81,38 @@ export default createStore({
   async logout({ commit }) {
     commit('logout',[])
   },
+  async googleLogin({ commit },payload) {
+    commit('setUser',payload)
+  },
   setTheme({commit}){
     commit('setTheme')
-  }
+  },
+  async getAdminInfo({ commit }) {
+      const token = localStorage.getItem('token1');
+      let response = await fetch("https://api.pinq.yooud.org/admin/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      let res = await response.json();
+      commit('setAdminInfo', res);
+    },
+    async modifyRole({ commit },payload){
+      const token = localStorage.getItem('token1');
+      commit('setLoad',true)
+      await fetch(`https://api.pinq.yooud.org/admin/user/${payload.id}`, {
+        method: "PATCH", // Метод запиту
+        headers: {
+          "Content-Type": "application/json", // Формат даних
+          "Authorization": `Bearer ${token}` // Додаємо токен авторизації
+        },
+        body: JSON.stringify({role:payload.role}) // Дані які ми відправляємо на сервер
+      })
+
+      commit('setLoad',false)
+    },
   },
   modules: {
   }

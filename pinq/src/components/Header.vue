@@ -14,18 +14,18 @@
         </button>
         <div class="header-nav closed" >
           <ul class="header-nav-list">
-            <li class="header-nav-el" >
-              <router-link v-if="username" :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'login' }">
-                Profile
+            <li class="header-nav-el" v-if = "role == 'admin'">
+                <router-link :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'admin' }">
+                  Admin 
               </router-link>  
             </li>
             <li class="header-nav-el" @click = "scrollToElement('faq')">
-                <p :class="{'header-nav-link':true,'black-color':theme}">FAQ</p> 
+                <p :class="{'header-nav-link':true,'black-color':theme}">FAQ {{ role }}</p> 
             </li>
             <li class="header-nav-el" @click = "scrollToElement('about')">
                 <p :class="{'header-nav-link':true,'black-color':theme}">About Us</p> 
             </li>
-            <li class="header-nav-el">
+            <li class="header-nav-el" v-if="!username">
               <router-link :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'login' }">
                 Login/Register
               </router-link>  
@@ -35,9 +35,9 @@
                 <button :class="{'head-btn1':true,'light-btn':theme}">Install</button>
               </div>
             </li>
-            <li class="header-nav-el">
-              <button v-if="username" @click = "logout" class="header-nav-btn">
-                Logout
+            <li class="header-nav-el" v-if="username">
+              <button  @click = "logout" :class="{'head-btn2':true,'light-btn':theme}">
+                Logout from {{username}}
               </button>
             </li>
             <div class="theme-switcher header-nav-el">
@@ -60,9 +60,9 @@
       <div class="burder-block openned" v-if = "isOpen">
         <div class="header-nav" v-if = "isOpen">
           <ul class="header-nav-list header-nav-list-burger" :class="{ 'light':this.$store.getters.getTheme }">
-            <li class="header-nav-el">
-              <router-link v-if="username" :class="{'black-color':this.$store.getters.getTheme}" class="header-nav-link" :to="{ name: 'login' }">
-                Profile
+            <li class="header-nav-el" v-if = "role == 'admin'">
+                <router-link :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'admin' }">
+                  Admin 
               </router-link>  
             </li>
             <li class="header-nav-el" @click = "close();scrollToElement('faq')">
@@ -82,8 +82,8 @@
               </div>
             </li>
             <li class="header-nav-el">
-              <button v-if="username" @click = "logout;close" class="header-nav-btn">
-                Logout
+              <button v-if="username" @click = "logout" :class="{'head-btn2':true,'light-btn':theme}">
+                Logout from {{username}}
               </button>
             </li>
             <div class="theme-switcher header-nav-el">
@@ -119,6 +119,12 @@
     border: none;
     cursor: pointer;
     width: 100px;
+  }
+  .head-btn2{
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
   }
   .head-btn1:hover {
     box-shadow: 0px 5px 10px rgba(211, 176, 22, 0.5);
@@ -227,7 +233,7 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  top: 345px;
+  top: 0;
   left: 0;
   background-color: #000;
   opacity: .3;
@@ -255,6 +261,7 @@
     .header-wrapper{
       padding: 0px 15px;
       position: fixed;
+      z-index: 9999;
       top: 0;
       left: 0;
       height: 75px;
@@ -298,7 +305,12 @@ label {
   border-radius: 50%;
   transition: transform 0.3s ease;
 }
-
+.burder-block{
+  z-index: 9999;
+}
+.header-nav-list{
+  z-index: 9999;
+}
 input[type="checkbox"] {
   display: none;
 }
@@ -340,6 +352,8 @@ export default {
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('username');
+      localStorage.removeItem('role');
+      localStorage.removeItem('token1');
       this.$store.dispatch('logout')
       this.$router.push({name:'login'})
     },
@@ -359,9 +373,16 @@ export default {
   },
   computed: {
     username() {
-      let a = this.$store.getters.getUser.username;
+      let a = this.$store.getters.getUser.email;
       if(localStorage.getItem('username')){
         return localStorage.getItem('username')
+      }
+      return a;
+    },
+    role() {
+      let a = this.$store.getters.getUser.role;
+      if(localStorage.getItem('role')){
+        return localStorage.getItem('role')
       }
       return a;
     },

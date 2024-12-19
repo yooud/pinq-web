@@ -53,6 +53,7 @@
     padding: 10px 0;
     flex-grow: 0;
     background-color: #000;
+    z-index: 9999;
   }
   .footer-wrapper{
     display: flex;

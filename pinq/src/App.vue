@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <Header v-if="!isAdmin"></Header>
+    <Header></Header>
     <main class="main" :style = "main">
       <router-view></router-view>
     </main>
-    <Footer v-if="!isAdmin"></Footer>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -22,12 +22,6 @@ export default {
       isAdmin: false,
       main: '',
     };
-  },
-  created() {
-    if (window.location.href.includes('admin')) {
-      this.isAdmin = true;
-      this.main = 'height: 100vh;display:block !important;'
-    }
   },
 };
 </script>

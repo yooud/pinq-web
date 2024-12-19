@@ -1,9 +1,7 @@
 <template>
   <div class="lending-page">
-    <div class = "planet">
-      <Three></Three>
-    </div>
-    <div class="head" id = "install">
+
+    <div class="head aaa" id = "install">
       <div class="container">
         <div :class="{'head-wrapper':true,'light':this.$store.getters.getTheme}">
           <h1 class="head-logo">
@@ -103,14 +101,14 @@
 </template>
 <script>
 import {  SwiperSlide } from 'swiper/vue';
-import Three from "./Three.vue";
+// import Three from "./Three.vue";
 import 'swiper/swiper-bundle.css';
 
 export default {
   name:'MainC',
   components: {
     SwiperSlide,
-    Three
+    // Three
   },
   created() {
     this.updateWidth();
@@ -374,6 +372,10 @@ export default {
   canvas {
     width: 100% !important;
     height: 500px !important;
+  }
+  .head{
+    z-index: 9999;
+    background-color: #fff;
   }
   @media (max-width: 1296px) {
     .about-wrapper{

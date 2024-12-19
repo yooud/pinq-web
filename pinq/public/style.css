@@ -52,6 +52,10 @@ html, body {
 .black-color{
   color: black !important;
 }
+.black-color1{
+  color: black !important;
+  background-color: #fff !important;
+}
 .light-btn{
   background-color: #000 !important;
   color: #fff !important;

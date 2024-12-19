@@ -27,6 +27,12 @@
         <div class="login-btn">
           <button class="login-btn-button" :class="{'light-btn':this.$store.getters.getTheme}" @click="tryLogin">Log in</button>
         </div>
+        <div class="login-btn">
+          <button class="login-btn-button google" :class="{'black-color1':this.$store.getters.getTheme}" @click="loginWithGoogle">
+            <img src="../assets/google.png" alt="Google Icon" class="google-icon" />
+            Log in with Google
+          </button>
+        </div>
         <div class="login-other">
           <p :class="{'login-other-f':true,'black-color':this.$store.getters.getTheme}">Forgot passwod?</p>
           <router-link :to="{ name: 'register' }">
@@ -41,6 +47,11 @@
 <script>
 
 import PreLoader from "./PreLoader.vue";
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import "firebase/auth";
+import router from '../router/index.js'; 
+
 export default {
   name: "LoginC",
   components: {
@@ -59,8 +70,50 @@ export default {
         username:this.username,
         password:this.password
       }) 
-      
     },
+    loginWithGoogle() {
+        const firebaseConfig = {
+          apiKey: "AIzaSyBuqpElC_1QAsocdTzAjyQR7BQ9cdWdpgg",
+            authDomain: "pinq-nure.firebaseapp.com",
+            projectId: "pinq-nure",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Вхід через Google
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                result.user.getIdToken(true).then((idToken) => {
+                    console.log("ID Token:", idToken);
+
+                    function base64UrlDecode(input) {
+                        // Заменяем символы Base64URL на символы Base64
+                        input = input.replace(/-/g, '+').replace(/_/g, '/');
+
+                        // Добавляем недостающие символы padding (если необходимо)
+                        while (input.length % 4 !== 0) {
+                            input += '=';
+                        }
+
+                        return atob(input);
+                    }
+                    const [header, payload] = idToken.split('.');
+                    const decodedPayload = JSON.parse(base64UrlDecode(payload));
+                    console.log("Decoded header:", header);
+                    localStorage.setItem('token', decodedPayload);
+                    localStorage.setItem('token1', idToken);
+                    localStorage.setItem('role', decodedPayload.role);
+                    localStorage.setItem('username', decodedPayload.email);
+                    this.$store.dispatch('googleLogin',decodedPayload)
+                    router.push('/');
+                });
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
   },
   computed:{
     load(){
@@ -153,11 +206,16 @@ export default {
     .password-block, .login-other{
       text-align: center;
     }
-
+    .login-btn-button {
+      width: 75%;
+    }
   }
   @media (max-width: 480px) {
     .login-wrapper{
       width: 50vh;
+    }
+    .login-btn-button {
+      width: 90%;
     }
 
   }
@@ -166,4 +224,22 @@ export default {
     cursor: pointer;
     margin-right: 5px;
   }
+  .google-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #4285F4;
+    color: white;
+  }
+  .google-icon {
+    width: 35px;
+    height: 35px;
+  }
+  .google{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #000;
+}
 </style>

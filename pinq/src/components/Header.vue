@@ -20,7 +20,7 @@
               </router-link>  
             </li>
             <li class="header-nav-el" @click = "scrollToElement('faq')">
-                <p :class="{'header-nav-link':true,'black-color':theme}">FAQ {{ role }}</p> 
+                <p :class="{'header-nav-link':true,'black-color':theme}">FAQ</p> 
             </li>
             <li class="header-nav-el" @click = "scrollToElement('about')">
                 <p :class="{'header-nav-link':true,'black-color':theme}">About Us</p> 

@@ -11,8 +11,8 @@
           <option value="last_activity.reversed">Last activity reversed</option>
         </select>
       </div>
-      <input type="text" v-model="searchQuery" placeholder="Search by username" @input="searchItems" />
-      <div>
+      <input type="text" class = "search" v-model="searchQuery" placeholder="Search by username" @input="searchItems" />
+      <div class = "showrole">
         <label><input type="checkbox" v-model="showAdmin" @change="filterItems"> Admin</label>
         <label><input type="checkbox" v-model="showUser" @change="filterItems"> User</label>
         <label><input type="checkbox" v-model="showModerator" @change="filterItems"> Moderator</label>
@@ -314,5 +314,134 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sort-block label {
+  font-weight: bold;
+  color: #333;
+}
+
+.sort-block select {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.sort-block select:hover {
+  border-color: #aaa;
+}
+
+.sort-block {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sort-block label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-right: 8px;
+}
+
+.sort-block select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.sort-block select:hover {
+  border-color: #888;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.sort-block select:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 6px rgba(0, 86, 179, 0.4);
+}
+
+.sort-block select option {
+  cursor: pointer !important;
+}
+
+.sort-block select option:hover {
+  background-color: #e0e0e0 !important;
+  color: #333;
+  --swiper-theme-color:#e0e0e0 !important;
+}
+
+.search{
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search:hover {
+  border-color: #888;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.search:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 6px rgba(0, 86, 179, 0.4);
+}
+
+
+
+.showrole {
+  display: flex;
+  gap: 15px;
+}
+
+.showrole label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.showrole label:hover {
+  color: #cfa01e;
+}
+
+.showrole input[type="checkbox"] {
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #cfa01e;
+  transition: transform 0.3s;
+}
+
+.showrole input[type="checkbox"]:hover {
+  transform: scale(1.1);
 }
 </style>

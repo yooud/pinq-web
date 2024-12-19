@@ -1,6 +1,6 @@
 <template>
   <div class="lending-page">
-
+    <Three></Three>
     <div class="head aaa" id = "install">
       <div class="container">
         <div :class="{'head-wrapper':true,'light':this.$store.getters.getTheme}">
@@ -101,14 +101,14 @@
 </template>
 <script>
 import {  SwiperSlide } from 'swiper/vue';
-// import Three from "./Three.vue";
+import Three from "./Three.vue";
 import 'swiper/swiper-bundle.css';
 
 export default {
   name:'MainC',
   components: {
     SwiperSlide,
-    // Three
+    Three
   },
   created() {
     this.updateWidth();
@@ -130,33 +130,33 @@ export default {
         theme: false,
         faqItems: [
           {
-            question: "What is FAQ?",
+            question: "How much does Pinq cost?",
             answer:
-              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+              "Pinq is free to download and use, with optional premium features available for enhanced functionality.",
             isOpen: false,
           },
           {
-            question: "What is FAQ?",
+            question: "What is Pinq?",
             answer:
-              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+              "Pinq is a mobile social networking app that helps you connect with friends in real time through features like GPS location tracking, instant messaging, and notifications about nearby friends.",
             isOpen: false,
           },
           {
-            question: "What is FAQ?",
+            question: "Can I hide my location on Pinq?",
             answer:
-              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+              "Absolutely! You can turn off location sharing or customize it to be visible only to certain friends or during specific times.",
             isOpen: false,
           },
           {
-            question: "What is FAQ?",
+            question: "Is Pinq safe to use?",
             answer:
-              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+              "Yes, safety is a priority at Pinq. The app offers advanced privacy controls and real-time connection features to keep you safe and social.",
             isOpen: false,
           },
           {
-            question: "What is FAQ?",
+            question: "Can I use Pinq to meet new people?",
             answer:
-              "FAQ is an abbreviation for ‘Frequently Asked Questions’, which contains a list of the most frequently asked questions and answers to them.",
+              "Yes! Pinq lets you discover new people with shared interests and explore exciting places around you.",
             isOpen: false,
           },
         ],
@@ -368,11 +368,7 @@ export default {
   .feature-content h3{
     padding: 15px;
   }
-  
-  canvas {
-    width: 100% !important;
-    height: 500px !important;
-  }
+
   .head{
     z-index: 9999;
     background-color: #fff;
@@ -416,9 +412,5 @@ export default {
     .features-head{
       width: 50%;
     }
-    canvas {
-    width: 100% !important;
-    height: 350px !important;
-  }
   }
 </style>

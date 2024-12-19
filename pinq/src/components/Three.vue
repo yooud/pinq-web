@@ -30,20 +30,25 @@ export default {
       // Создаем сцену
       this.scene = new THREE.Scene();
 
+      // Получаем размеры контейнера
+      const container = this.$refs.planetContainer;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
       // Создаем камеру
       this.camera = new THREE.PerspectiveCamera(
         75,
-        window.innerWidth / window.innerHeight,
+        width / height,
         0.1,
-        1000
+        750
       );
       this.camera.position.z = 2; // Отодвигаем камеру назад
 
       // Создаем рендерер
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setSize(width, height);
       this.renderer.setClearColor(0xeeeded);
-      this.$refs.planetContainer.appendChild(this.renderer.domElement);
+      container.appendChild(this.renderer.domElement);
 
       // Set the initial background color based on the theme
       this.updateBackgroundColor(this.$store.getters.getTheme);
@@ -81,9 +86,9 @@ export default {
       
       // Уменьшаем размер планеты в зависимости от ширины экрана
       if (window.innerWidth < 500) {
-        this.planet.scale.set(0.5, 0.7, 0.7); // уменьшение размера для маленьких экранов
+        this.planet.scale.set(0.8, 0.8, 0.8); // уменьшение размера для маленьких экранов
       } else {
-        this.planet.scale.set(0.9, 0.9, 0.9); // стандартный размер
+        this.planet.scale.set(1, 1, 1); // стандартный размер
       }
 
       this.scene.add(this.planet);
@@ -97,10 +102,13 @@ export default {
       this.renderer.render(this.scene, this.camera); // Рендер сцены
     },
     onWindowResize() {
-      // Адаптируем камеру и рендерер под размер окна
-      this.camera.aspect = window.innerWidth / window.innerHeight;
+      const container = this.$refs.planetContainer;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setSize(width, height);
     },
     dispose() {
       // Очищаем ресурсы Three.js
@@ -125,6 +133,7 @@ export default {
 <style>
 .planet-container {
   width: 100%;
+  height: 500px; /* Set the desired height */
   overflow: hidden;
   position: relative;
 }
@@ -135,5 +144,12 @@ export default {
   padding-top: 25px;
   font-size: 45px;
 }
-
+@media (max-width: 480px) {
+    .planet-container {
+      width: 100%;
+      height: 350px; /* Set the desired height */
+      overflow: hidden;
+      position: relative;
+    }
+  }
 </style>

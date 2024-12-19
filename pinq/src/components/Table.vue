@@ -30,7 +30,7 @@
       </thead>
       <tbody>
         <tr v-for="item in paginatedItems" :key="item.id">
-          <td v-for="key in Object.keys(item)" :key="key" v-html="item[key]"></td>
+          <td v-for="key in Object.keys(item)" :key="key" v-html="innerFunc(item,key)"></td>
           <td>
             <button @click="editItem(item.id,item.role)">Edit</button>
             <button @click="deleteItem(item.id)">Delete</button>
@@ -97,7 +97,7 @@ export default {
       showUser: true,
       showModerator: true,
       currentPage: 1,
-      itemsPerPage: 1,
+      itemsPerPage: 3,
     };
   },
   computed: {
@@ -143,6 +143,13 @@ export default {
     this.$store.dispatch('getAdminInfo',this.$store.getters.getAdminPagination);
   },
   methods: {
+    innerFunc(item,key){
+      console.log(key)
+      if(key == 'profile_image'){
+        return `<img src = "${item[key]}" class = "admin-img"></img>`;
+      }
+      return item[key];
+    },
     changeFirst(){
       this.first = false;
     },
@@ -254,24 +261,60 @@ export default {
 
 <style scoped>
 /* Стиль таблицы и формы */
-.table-wrapper{
+.table-wrapper {
   height: 55vh;
   overflow-y: scroll;
-
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 th, td {
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
+
+th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+  color: #333;
+}
+
+td {
+  background-color: #fff;
+  color: #555;
+}
+
+tr:hover td {
+  background-color: #f9f9f9;
+}
+
 button {
   margin: 5px;
-  padding: 5px 10px;
+  padding: 8px 12px;
   cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s;
 }
+
+button:hover {
+  background-color: #0056b3;
+}
+
 form div {
   margin: 10px 0;
 }
@@ -288,6 +331,7 @@ form div {
   justify-content: center;
   z-index: 1000;
 }
+
 .modal {
   background: #fff;
   padding: 20px;
@@ -295,47 +339,57 @@ form div {
   width: 400px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .modal h3 {
   margin-top: 0;
   text-align: center;
 }
+
 .modal-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
-.edit-name{
-    margin-right: 15px;
-    text-align: center;
+
+.edit-name {
+  margin-right: 15px;
+  text-align: center;
 }
-td{
-    text-align: center;
-    word-wrap: break-word;
-    max-width: 100px;
+
+td {
+  text-align: center;
+  word-wrap: break-word;
+  max-width: 100px;
 }
-.contant-name{
+
+.contant-name {
   font-size: 35px;
   margin-bottom: 20px;
 }
-.modal-block{
+
+.modal-block {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
+
 input[type="checkbox"] {
-    display: block;
+  display: block;
 }
-.table-settings{
+
+.table-settings {
   display: flex;
   gap: 30px;
   align-items: center;
 }
-.head-block-table{
+
+.head-block-table {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
-.sort-block{
+
+.sort-block {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -415,7 +469,7 @@ input[type="checkbox"] {
   --swiper-theme-color:#e0e0e0 !important;
 }
 
-.search{
+.search {
   padding: 8px 12px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -435,8 +489,6 @@ input[type="checkbox"] {
   border-color: #0056b3;
   box-shadow: 0 0 6px rgba(0, 86, 179, 0.4);
 }
-
-
 
 .showrole {
   display: flex;
@@ -481,8 +533,6 @@ input[type="checkbox"] {
   padding: 10px 20px;
   margin: 0 10px;
   cursor: pointer;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
   border-radius: 5px;
   transition: background-color 0.3s, border-color 0.3s;
 }

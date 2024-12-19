@@ -110,11 +110,13 @@ export default createStore({
         }
       })
       let res = await response.json();
+      console.log(res)
       res.data.forEach((el) => {
         const date = new Date(el.created_at * 1000);
         el.created_at = date.toDateString();
         el.username = el.profile.username;
         el.last_activity  = el.profile.last_activity;
+        el.profile_image = el.profile.profile_picture_url
         delete el.profile
       });
       commit('setAdminInfo', res);

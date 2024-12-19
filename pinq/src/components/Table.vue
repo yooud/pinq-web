@@ -29,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in filteredItems" :key="item.id">
+        <tr v-for="item in paginatedItems" :key="item.id">
           <td v-for="key in Object.keys(item)" :key="key" v-html="item[key]"></td>
           <td>
             <button @click="editItem(item.id,item.role)">Edit</button>
@@ -61,6 +61,12 @@
     </div>
     <PreLoader :loading = "load"></PreLoader>
   </div>
+  <div class="pagination">
+    <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+  </div>
+  <PreLoader :loading="load"></PreLoader>
 </template>
 
 <script>
@@ -90,6 +96,8 @@ export default {
       showAdmin: true,
       showUser: true,
       showModerator: true,
+      currentPage: 1,
+      itemsPerPage: 1,
     };
   },
   computed: {
@@ -121,10 +129,18 @@ export default {
         return true;
       });
       return filtered;
-    }
+    },
+    totalPages() {
+      return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+    },
+    paginatedItems() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredItems.slice(start, end);
+    },
   },
   created() {
-    this.$store.dispatch('getAdminInfo')
+    this.$store.dispatch('getAdminInfo',this.$store.getters.getAdminPagination);
   },
   methods: {
     changeFirst(){
@@ -222,6 +238,16 @@ export default {
     filterItems() {
       this.filteredItems;
     },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
   }
 };
 </script>
@@ -235,7 +261,6 @@ export default {
 }
 table {
   width: 100%;
-  height: 500px;
   border-collapse: collapse;
 }
 th, td {
@@ -443,5 +468,32 @@ input[type="checkbox"] {
 
 .showrole input[type="checkbox"]:hover {
   transform: scale(1.1);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: 500;
 }
 </style>

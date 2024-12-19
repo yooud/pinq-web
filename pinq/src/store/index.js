@@ -7,6 +7,12 @@ export default createStore({
     load:false,
     theme: false,
     adminInfo:[],
+    adminInfoPagination:[],
+    adminPagination:{
+      skip:0,
+      count:3,
+      page:1
+    }
   },
   getters: {
     getUser(state){
@@ -20,6 +26,9 @@ export default createStore({
     },
     getAdminInfo(state){
       return state.adminInfo
+    },
+    getAdminPagination(state){
+      return state.adminPagination
     }
   },
   mutations: {
@@ -37,6 +46,9 @@ export default createStore({
     },
     setAdminInfo(state,payload){
       state.adminInfo = payload
+    },
+    setAdminPagination(state,payload){
+      state.adminPagination = payload
     }
   },
   actions: {
@@ -87,10 +99,10 @@ export default createStore({
   setTheme({commit}){
     commit('setTheme')
   },
-  async getAdminInfo({ commit }) {
+  async getAdminInfo({ commit }){
       commit('setLoad',true)
       const token = localStorage.getItem('token1');
-      let response = await fetch("https://api.pinq.yooud.org/admin/user", {
+      let response = await fetch(`https://api.pinq.yooud.org/admin/user`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -122,6 +134,9 @@ export default createStore({
 
       commit('setLoad',false)
     },
+    setAdminPagination({commit},payload){
+      commit('setAdminPagination',payload)
+    }
   },
   modules: {
   }

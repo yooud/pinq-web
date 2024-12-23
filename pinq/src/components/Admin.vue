@@ -52,7 +52,7 @@ export default {
         { name: 'Produce', description: 'Dried fruit and bean curd', count: 5 },
         { name: 'Seafood', description: 'Seaweed and fish', count: 12 },
       ],
-      menuItems: ['Users', 'Messages', 'Notifications']
+      menuItems: ['Users']
     };
   },
   methods: {

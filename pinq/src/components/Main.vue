@@ -11,7 +11,7 @@
             Keep your friends closer, stay in touch in real time!
           </h3>
           <div class="head-btn-wrapper">
-            <button :class="{'head-btn':true,'light-btn':this.$store.getters.getTheme}">Install</button>
+            <button :class="{'head-btn':true,'light-btn':this.$store.getters.getTheme}" @click="redirectToDownload">Install</button>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
               <SwiperSlide>
                 <div class="feature-content">
                   <div class="features-img-block">
-                    <img src="../assets/nearby.png" alt="Feature image" />
+                    <img src="../assets/nearby.jpg" alt="Feature image" />
                   </div>
                   <h3>Find Nearby Friends</h3>
                   <p>Connect with people nearby who share your interests.</p>
@@ -74,7 +74,7 @@
             </p>
           </div>
           <div class="about-img-wrapper">
-            <img src="../assets/about.jpg" alt="" class="about-img">
+            <img src="../assets/about.png" alt="" class="about-img">
           </div>
         </div>
       </div>
@@ -182,6 +182,9 @@ export default {
       },
       updateWidth() {
         this.windowWidth = window.innerWidth;
+      },
+      redirectToDownload() {
+        window.location.href = "https://pinq.yooud.org/download";
       },
     },
 };
@@ -359,6 +362,10 @@ export default {
     overflow: hidden;
     border-radius: 100%;
     border: 1px solid black;
+  }
+  .features-img-block img{
+    object-fit: cover;
+    object-position: center;
   }
   .feature-content img{
     width: 100%;

@@ -32,7 +32,7 @@
             </li>
             <li class="header-nav-el">
               <div class="head-btn-wrapper">
-                <button :class="{'head-btn1':true,'light-btn':theme}">Install</button>
+                <button @click="redirectToDownload" :class="{'head-btn1':true,'light-btn':theme}">Install</button>
               </div>
             </li>
             <li class="header-nav-el" v-if="username">
@@ -71,7 +71,7 @@
             <li class="header-nav-el" @click = "scrollToElement('about');close()">
                 <p class="header-nav-link" :class="{'black-color':this.$store.getters.getTheme}">About Us</p> 
             </li>
-            <li class="header-nav-el">
+            <li class="header-nav-el" v-if="!username">
               <router-link class="header-nav-link" :class="{'black-color':this.$store.getters.getTheme}" :to="{ name: 'login' }" @click = "close">
                 Login/Register
               </router-link>  
@@ -343,6 +343,9 @@ export default {
     this.theme = this.$store.getters.getTheme
   },
   methods: {
+    redirectToDownload() {
+      window.location.href = "https://pinq.yooud.org/download";
+    },
     toggleTheme() {
       this.$store.dispatch('setTheme')
     },

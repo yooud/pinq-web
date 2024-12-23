@@ -115,7 +115,6 @@ export default createStore({
         const date = new Date(el.created_at * 1000);
         el.created_at = date.toDateString();
         el.username = el.profile.username;
-        el.last_activity  = el.profile.last_activity;
         el.profile_image = el.profile.profile_picture_url
         delete el.profile
       });

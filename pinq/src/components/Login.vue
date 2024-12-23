@@ -86,30 +86,34 @@ export default {
         // Вхід через Google
         signInWithPopup(auth, provider)
             .then((result) => {
-                result.user.getIdToken(true).then((idToken) => {
-                    console.log("ID Token:", idToken);
+                const updateToken = () => {
+                    result.user.getIdToken(true).then((idToken) => {
+                        console.log("ID Token:", idToken);
 
-                    function base64UrlDecode(input) {
-                        // Заменяем символы Base64URL на символы Base64
-                        input = input.replace(/-/g, '+').replace(/_/g, '/');
+                        function base64UrlDecode(input) {
+                            input = input.replace(/-/g, '+').replace(/_/g, '/');
 
-                        // Добавляем недостающие символы padding (если необходимо)
-                        while (input.length % 4 !== 0) {
-                            input += '=';
+                            while (input.length % 4 !== 0) {
+                                input += '=';
+                            }
+
+                            return atob(input);
                         }
+                        const [header, payload] = idToken.split('.');
+                        const decodedPayload = JSON.parse(base64UrlDecode(payload));
+                        console.log("Decoded header:", header);
+                        console.log("Decoded payload:", decodedPayload);
+                        localStorage.setItem('token', decodedPayload);
+                        localStorage.setItem('token1', idToken);
+                        localStorage.setItem('role', decodedPayload.role);
+                        localStorage.setItem('username', decodedPayload.email);
+                        this.$store.dispatch('googleLogin',decodedPayload)
+                    });
+                };
 
-                        return atob(input);
-                    }
-                    const [header, payload] = idToken.split('.');
-                    const decodedPayload = JSON.parse(base64UrlDecode(payload));
-                    console.log("Decoded header:", header);
-                    localStorage.setItem('token', decodedPayload);
-                    localStorage.setItem('token1', idToken);
-                    localStorage.setItem('role', decodedPayload.role);
-                    localStorage.setItem('username', decodedPayload.email);
-                    this.$store.dispatch('googleLogin',decodedPayload)
-                    router.push('/');
-                });
+                updateToken();
+                setInterval(updateToken, 1800000); // 30 minutes in milliseconds
+                router.push('/');
             })
             .catch((error) => {
                 console.error("Error:", error);

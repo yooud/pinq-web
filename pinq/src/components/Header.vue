@@ -27,7 +27,7 @@
             </li>
             <li class="header-nav-el" v-if="!username">
               <router-link :class="{'header-nav-link':true,'black-color':theme}" :to="{ name: 'login' }">
-                Login/Register
+                Login
               </router-link>  
             </li>
             <li class="header-nav-el">

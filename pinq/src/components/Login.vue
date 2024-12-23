@@ -171,6 +171,7 @@ export default {
     cursor: pointer;
     margin: 0 auto;
     width: 40%;
+    background-color: #fff;
   }
   .login-btn-button:hover {
     box-shadow: 0px 5px 10px rgba(211, 176, 22, 0.5);
@@ -234,7 +235,7 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background-color: #4285F4;
+    background-color: #ffffff;
     color: white;
   }
   .google-icon {
@@ -246,5 +247,6 @@ export default {
     align-items: center;
     gap: 10px;
     border: 1px solid #000;
+    background-color: #fff;
 }
 </style>

@@ -362,15 +362,16 @@ export default {
     overflow: hidden;
     border-radius: 100%;
     border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .features-img-block img{
-    object-fit: cover;
     object-position: center;
-  }
-  .feature-content img{
-    width: 100%;
-    height: 100%;
-    object-position: center;
+    width: 80%;
+    height: 80%;
+    overflow: hidden;
+    border-radius: 100%;
   }
   .feature-content h3{
     padding: 15px;
